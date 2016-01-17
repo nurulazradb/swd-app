@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Shorteners</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>Slug</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shorteners.each do |shortener| %>
+      <tr>
+        <td><%= shortener.url %></td>
+        <td><%= link_to 'ClipIt!', clip_shorteners_path(shortener.slug), target: '_blank' %></td>
+        <td><%= link_to 'Show', shortener %></td>
+        <td><%= link_to 'Edit', edit_shortener_path(shortener) %></td>
+        <td><%= link_to 'Destroy', shortener, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shortener', new_shortener_path %>
