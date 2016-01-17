@@ -1,24 +1,72 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Firstname:</strong>
-  <%= @resume.firstname %>
+  <img src="//gravatar.com/avatar/<%= @resume.gravatar_hash %>" />
 </p>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @resume.lastname %>
-</p>
+<h2>
+  <%= @resume.fullname %>
+  <%= @profile['email'] %>
+  <%= @profile['mobile_no'] %>
+</h2>
 
-<p>
-  <strong>Email:</strong>
-  <%= @resume.email %>
-</p>
+<h3>
+  Professional Experience
+</h3>
 
-<p>
-  <strong>Cv:</strong>
-  <%= @resume.cv %>
-</p>
+<% @experiences.each do |exp| %>
+  <h4>
+    <%= exp['title'] %> / <%= exp['company'] %> &mdash; <%= exp['location'] %>
+    <%= exp['started'] %> &ndash; <%= exp['ended'] %>
+  </h4>
+
+  <p>
+    <%= exp['description'] %>
+  </p>
+<% end %>
+
+<h3>
+  Professional Training
+</h3>
+
+<% @trainings.each do |trn| %>
+  <h4>
+    <%= trn['title'] %> / <%= trn['location'] %>
+    <%= trn['started'] %> &ndash; <%= trn['ended'] %>
+  </h4>
+
+  <p>
+    <%= trn['details'] %>
+  </p>
+<% end %>
+
+<h3>
+  Education
+</h3>
+
+<% @educations.each do |edu| %>
+  <h4>
+    <%= edu['course'] %> / <%= edu['place'] %>
+    <%= edu['graduated_in'] %>
+  </h4>
+
+  <p>
+    <%= edu['degree'] %>
+  </p>
+<% end %>
+
+<h3>
+  Portfolios
+</h3>
+
+<% @portfolios.each do |pfl| %>
+  <h4>
+    <%= pfl['title'] %>
+  </h4>
+  <p>
+    <%= pfl['details'] %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_resume_path(@resume) %> |
 <%= link_to 'Back', resumes_path %>

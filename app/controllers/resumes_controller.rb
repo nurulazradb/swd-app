@@ -10,6 +10,12 @@ class ResumesController < ApplicationController
   # GET /resumes/1
   # GET /resumes/1.json
   def show
+    @cv = JSON.parse(@resume.cv)
+    @profile = @cv['profile']
+    @experiences = @cv['cv']['experiences']
+    @trainings = @cv['cv']['trainings']
+    @educations = @cv['cv']['educations']
+    @portfolios = @cv['cv']['portfolios']
   end
 
   # GET /resumes/new
