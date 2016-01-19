@@ -1,5 +1,6 @@
 class Board
-  attr_accessor :board_fields, :empty_fields, :winning_lines
+  attr_accessor :board_fields, :empty_fields
+  attr_reader :size, :winning_lines
 
   def initialize(size=3)
     @size = size
@@ -10,10 +11,27 @@ class Board
     set_board
   end
 
-  def fill_field(position, mark)
-    @board_fields[position] = "#{mark}"
-    @empty_fields.delete(position)
+  def mark(position, mark)
+    if @empty_fields.include? position
+      @board_fields[position] = "#{mark}"
+      @empty_fields.delete(position)
+    end
   end
+
+  def winner?(mark)
+    winner = ["#{mark}", "#{mark}", "#{mark}"]
+    @winning_lines.each do |line|
+      _line = line.collect {|x| @board_fields[x]}
+      return true if winner == _line
+    end
+    false
+  end
+
+  def tie?
+    @empty_fields.empty?
+  end
+
+  private
 
   def set_board_fields
     (1..@size**2).each {|p| @board_fields[p] = " "; @empty_fields << p}
