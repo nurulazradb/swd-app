@@ -13,13 +13,15 @@ class Board
 
   def mark(position, mark)
     if @empty_fields.include? position
-      @board_fields[position] = "#{mark}"
+      @board_fields[position] = " #{mark} "
       @empty_fields.delete(position)
     end
   end
 
   def winner?(mark)
-    winner = ["#{mark}", "#{mark}", "#{mark}"]
+    winner = []
+    (1..@size).each {|m| winner << " #{mark} "}
+
     @winning_lines.each do |line|
       _line = line.collect {|x| @board_fields[x]}
       return true if winner == _line
@@ -31,10 +33,22 @@ class Board
     @empty_fields.empty?
   end
 
+  def draw
+    (0...@size).each do |row|
+      fields = []
+      separator = []
+      num = row*@size
+      (1..@size).each {|s| separator << '---'}
+      puts separator.join('+') if num > 0
+      (1..@size).each {|c| fields << @board_fields[(num + c)]}
+      puts fields.join('|')
+    end
+  end
+
   private
 
   def set_board_fields
-    (1..@size**2).each {|p| @board_fields[p] = " "; @empty_fields << p}
+    (1..@size**2).each {|p| @board_fields[p] = "   "; @empty_fields << p}
   end
 
   def set_winning_lines
