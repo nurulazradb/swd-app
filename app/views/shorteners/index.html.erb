@@ -14,7 +14,10 @@
   <tbody>
     <% @shorteners.each do |shortener| %>
       <tr>
-        <td><%= shortener.url %></td>
+        <td>
+          <%= shortener.url %><br>
+          <small class="text-muted">clip: <%= clip_shorteners_url(shortener.slug) %></small>
+        </td>
         <td><%= link_to 'ClipIt!', clip_shorteners_path(shortener.slug), target: '_blank' %></td>
         <td><%= link_to 'Show', shortener %></td>
         <td><%= link_to 'Edit', edit_shortener_path(shortener) %></td>
