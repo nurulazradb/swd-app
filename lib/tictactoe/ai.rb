@@ -7,13 +7,17 @@ class AI < Player
 
   def move
     best_move = []
+    choose = ''
     win_move.each {|m| best_move << m if block_move.include? m}
 
-    if best_move.nil?
-      @game.board.mark @game.board.empty_fields.sample, marker
+    if best_move.length == 0
+      choose = win_move.sample
+      choose = block_move.sample if choose.nil?
     else
-      @game.board.mark best_move.sample, marker
+      choose = best_move.sample
     end
+    choose = @game.board.empty_fields.sample if choose.nil?
+    @game.board.mark choose, marker
   end
 
   def win_move
