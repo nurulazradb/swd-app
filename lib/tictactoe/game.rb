@@ -1,10 +1,12 @@
 class Game
-  attr_accessor :board, :turn, :current_player, :other_player
+  attr_accessor :board, :current_player, :other_player
+  attr_reader :round
 
   def initialize(board, players)
     @board = board
-    @turn = 0
+    @round = 1
     @current_player, @other_player = players
+    @first_player = players.first
     @game_over = false
   end
 
@@ -21,23 +23,48 @@ class Game
   end
 
   def show_board
+    puts "Round ##{@round}"
     @board.draw
   end
 
   def turn
     show_board
-    puts "Player #{@current_player.name}, please enter a valid spot (#{@board.empty_fields.join(', ')}) to place your #{@current_player.marker}"
-    choice = gets.chomp.to_i
-
-    if @board.empty_fields.include? choice
-      @board.mark choice, @current_player.marker
+    if @current_player.name == 'Computer'
+      ai_turn
     else
-      puts "Please try again!"
-      turn
+      puts "Player #{@current_player.name}, please enter a valid spot (#{@board.empty_fields.join(', ')}) to place your #{@current_player.marker}"
+      choice = gets.chomp.to_i
+
+      if @board.empty_fields.include? choice
+        @board.mark choice, @current_player.marker
+      else
+        puts "Please try again!"
+        turn
+      end
     end
+
     result
     switch_player
+    @round += 1 if @current_player == @first_player
     turn unless game_over?
+  end
+
+  def ai_turn
+    # puts "Player #{@current_player.name}, please enter a valid spot (#{@board.empty_fields.join(', ')}) to place your #{@current_player.marker}"
+    if @board.empty_fields.length == @board.size ** 2
+      choice = first_moves.sample if choice.nil?
+    else
+      choice = @current_player.move
+    end
+
+    @board.mark choice, @current_player.marker
+
+    # if @board.empty_fields.include? choice
+    #   @board.mark choice, @current_player.marker
+    # else
+    #   puts "Please try again!"
+    #   turn
+    # end
   end
 
   def result

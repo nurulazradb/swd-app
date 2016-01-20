@@ -1,6 +1,7 @@
 require_relative 'tictactoe/board'
 require_relative 'tictactoe/game'
 require_relative 'tictactoe/player'
+require_relative 'tictactoe/ai'
 
 puts 'Select play mode:'
 puts '1. 1 Player'
@@ -8,8 +9,8 @@ puts '2. 2 Players'
 players = gets.chomp.to_i
 
 if players == 1
-  p1 = Player.new 'Human', 'X'
-  p2 = Player.new 'Computer', 'O'
+  p1 = AI.new 'Computer', 'O'
+  p2 = Player.new 'Human', 'X'
 else
   p1 = Player.new 'Human #1', 'X'
   p2 = Player.new 'Human #2', 'O'
@@ -31,4 +32,5 @@ else
 end
 
 game = Game.new Board.new(board), [p1,p2]
+p1.game = game if p1.is_a? AI
 game.run

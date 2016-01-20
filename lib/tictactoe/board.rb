@@ -1,12 +1,12 @@
 class Board
   attr_accessor :board_fields, :empty_fields
-  attr_reader :size, :winning_lines
+  attr_reader :size, :lines
 
   def initialize(size=3)
     @size = size
     @board_fields = {}
     @empty_fields = []
-    @winning_lines = []
+    @lines = []
 
     set_board
   end
@@ -22,7 +22,7 @@ class Board
     winner = []
     (1..@size).each {|m| winner << " #{mark} "}
 
-    @winning_lines.each do |line|
+    @lines.each do |line|
       _line = line.collect {|x| @board_fields[x]}
       return true if winner == _line
     end
@@ -51,13 +51,13 @@ class Board
     (1..@size**2).each {|p| @board_fields[p] = "   "; @empty_fields << p}
   end
 
-  def set_winning_lines
+  def set_lines
     # create for column
     columns = []
     (1..@size).each do |line|
       columns[line] = []
       (0...@size).each {|key| columns[line] << @size*key + line}
-      @winning_lines << columns[line]
+      @lines << columns[line]
     end
 
     # create for row
@@ -65,7 +65,7 @@ class Board
     (0...@size).each do |line|
       rows[line] = []
       (1..@size).each {|key| rows[line] << line*@size + key}
-      @winning_lines << rows[line]
+      @lines << rows[line]
     end
 
     # create for diagonal
@@ -76,12 +76,12 @@ class Board
       diagonals[1] << @size*key + (key+1)
       diagonals[2] << @size*key + (@size-key)
     end
-    @winning_lines << diagonals[1]
-    @winning_lines << diagonals[2]
+    @lines << diagonals[1]
+    @lines << diagonals[2]
   end
 
   def set_board
     set_board_fields
-    set_winning_lines
+    set_lines
   end
 end
