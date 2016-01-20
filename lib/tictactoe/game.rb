@@ -20,6 +20,8 @@ class Game
   end
 
   def show_board
+    puts ""
+    puts "[Tic Tac Toe]"
     @board.draw
   end
 
