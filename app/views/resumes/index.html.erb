@@ -2,13 +2,12 @@
 
 <h1>Listing Resumes</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Firstname</th>
       <th>Lastname</th>
       <th>Email</th>
-      <th>Cv</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,7 +18,6 @@
         <td><%= resume.firstname %></td>
         <td><%= resume.lastname %></td>
         <td><%= resume.email %></td>
-        <td><%= resume.cv %></td>
         <td><%= link_to 'Show', resume %></td>
         <td><%= link_to 'Edit', edit_resume_path(resume) %></td>
         <td><%= link_to 'Destroy', resume, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -30,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Resume', new_resume_path %>
+<%= link_to 'New Resume', new_resume_path, class: 'btn btn-default' %>
