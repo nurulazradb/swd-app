@@ -61,12 +61,8 @@ class Board
     end
 
     # create for row
-    rows = []
-    (0...@size).each do |line|
-      rows[line] = []
-      (1..@size).each {|key| rows[line] << line*@size + key}
-      @lines << rows[line]
-    end
+    rows = @lines.transpose
+    rows.each {|r| @lines << r}
 
     # create for diagonal
     diagonals = []
