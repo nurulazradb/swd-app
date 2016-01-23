@@ -26,8 +26,9 @@ class Game
   end
 
   def turn
+    clr
     show_board
-    if @current_player.name == 'Computer'
+    if @current_player.is_a? AI
       ai_turn
     else
       puts "Player #{@current_player.name}, please enter a valid spot (#{@board.empty_fields.join(', ')}) to place your #{@current_player.marker}"
@@ -57,6 +58,7 @@ class Game
   end
 
   def result
+    clr
     if @board.winner? @current_player.marker
       show_board
       puts "Game Over! Winner is #{@current_player.name}"
@@ -72,5 +74,9 @@ class Game
     while !game_over?
       turn
     end
+  end
+
+  def clr
+    puts "\e[H\e[2J"
   end
 end
