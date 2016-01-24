@@ -22,7 +22,7 @@ class Game
   def show_board
     puts ""
     puts "[Tic Tac Toe]"
-    @board.draw
+    puts @board.draw
   end
 
   def turn

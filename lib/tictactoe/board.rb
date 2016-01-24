@@ -34,15 +34,18 @@ class Board
   end
 
   def draw
+    drawing = ''
     (0...@size).each do |row|
       fields = []
       separator = []
       num = row*@size
       (1..@size).each {|s| separator << '---'}
-      puts separator.join('+') if num > 0
+      drawing += separator.join('+') + "\n" if num > 0
       (1..@size).each {|c| fields << @board_fields[(num + c)]}
-      puts fields.join('|')
+      drawing += fields.join('|') + "\n"
     end
+
+    drawing
   end
 
   private
