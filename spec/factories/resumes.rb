@@ -69,6 +69,18 @@ FactoryGirl.define do
       email 'invalid.email'
       cv ''
     end
+
+    trait :male do
+      firstname 'John'
+      lastname 'Doe'
+      email 'john.doe@email.com'
+    end
+
+    trait :female do
+      firstname 'Jane'
+      lastname 'Doe'
+      email 'jane.doe@email.com'
+    end
   end
 
 end

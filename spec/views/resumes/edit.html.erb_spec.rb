@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "resumes/edit", type: :view do
   before(:each) do
-    @resume = assign(:resume, Resume.create!(
-      :firstname => "MyString",
-      :lastname => "MyString",
-      :email => "MyString",
-      :cv => "MyText"
-    ))
+    @resume = create(:resume)
   end
 
   it "renders the edit resume form" do

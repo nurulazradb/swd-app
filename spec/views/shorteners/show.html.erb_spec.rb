@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "shorteners/show", type: :view do
   before(:each) do
-    @shortener = assign(:shortener, Shortener.create!(
-      :url => "Url",
-      :slug => "Slug"
-    ))
+    @shortener = create(:shortener)
   end
 
   it "renders attributes in <p>" do
